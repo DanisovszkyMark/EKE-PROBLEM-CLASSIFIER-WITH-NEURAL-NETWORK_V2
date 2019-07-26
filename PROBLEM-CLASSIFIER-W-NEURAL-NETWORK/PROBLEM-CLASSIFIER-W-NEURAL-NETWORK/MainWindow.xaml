@@ -21,12 +21,12 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="btn_learningLabels" Content="Create Learning Labels" Grid.Row="0" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
+        <Button x:Name="btn_learningLabels" Content="Create Learning Labels" Grid.Row="0" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}" Click="btn_learningLabels_Click"/>
         <Button x:Name="btn_learningSet" Content="Create Learning Set" Grid.Row="1" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
         <Button x:Name="btn_makeNeuralNetwork" Content="Make Neural Network" Grid.Row="2" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
         <Button x:Name="btn_training" Content="Training" Grid.Row="3" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
         <Button x:Name="btn_testing" Content="Testing" Grid.Row="4" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
         <Button x:Name="btn_exportNetwork" Content="Export Network" Grid.Row="5" Grid.Column="0" Background="{DynamicResource LightBackgroundBrush}" Foreground="{DynamicResource LightForegroundBrush}"/>
-        <Grid x:Name="grid_userControlHolder" Grid.Row="0" Grid.Column="1" Grid.RowSpan="7"/>
+        <UserControl x:Name="userControlHolder" Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Background="{DynamicResource DarkBackgroundBrush}"  />
     </Grid>
 </Window>

@@ -1,5 +1,4 @@
-﻿using PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,23 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
+namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for AddLearningLabelControl.xaml
+    /// </summary>
+    public partial class AddLearningLabelControl : UserControl
     {
-        CreateLearningLabelsControl cllc;
-
-        public MainWindow()
+        public AddLearningLabelControl()
         {
             InitializeComponent();
-
-
         }
 
-        private void btn_learningLabels_Click(object sender, RoutedEventArgs e)
+        private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (cllc == null) cllc = new CreateLearningLabelsControl();
-            userControlHolder.Content = cllc;
+            MessageBox.Show("Új elem");
         }
     }
 }
