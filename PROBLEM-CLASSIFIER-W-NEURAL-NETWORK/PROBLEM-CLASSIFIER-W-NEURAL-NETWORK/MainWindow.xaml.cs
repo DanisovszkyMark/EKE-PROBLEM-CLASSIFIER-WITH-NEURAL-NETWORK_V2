@@ -61,5 +61,10 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
             if (tc == null) tc = new TrainingControl();
             userControlHolder.Content = tc;
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (tc != null) tc.AbortThread();
+        }
     }
 }

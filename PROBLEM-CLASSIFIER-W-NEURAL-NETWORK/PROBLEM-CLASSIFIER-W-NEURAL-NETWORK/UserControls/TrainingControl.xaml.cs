@@ -27,10 +27,9 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
         NeuralNetwork nn;
         List<double[]> inputs;
         List<double[]> outputs;
-        BackgroundWorker worker;
-
+        Thread t1;
         int reps;
-        string state;
+
 
         public TrainingControl()
         {
@@ -38,16 +37,8 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
 
             inputs = new List<double[]>();
             outputs = new List<double[]>();
+            t1 = new Thread(() => Learning(this.rtb_log, this.pb_training, this.btn_start));
             reps = 0;
-
-            worker = new BackgroundWorker();
-            worker.WorkerSupportsCancellation = true;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-
-            state = "";
         }
 
         private void btn_trainingSetsBrowse_Click(object sender, RoutedEventArgs e)
@@ -91,8 +82,6 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                     outputs.Add(atmOutput);
                 }
                 sr.Close();
-
-                MessageBox.Show("Success!");
             }
         }
 
@@ -116,7 +105,6 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 this.btn_saveNetwork.IsEnabled = true;
 
                 this.reps = Convert.ToInt32(this.tb_reps.Text.ToString());
-
                 this.pb_training.Value = 0;
                 this.pb_training.Minimum = 0;
                 this.pb_training.Maximum = this.reps;
@@ -124,29 +112,13 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 TextRange txt = new TextRange(this.rtb_log.Document.ContentStart, this.rtb_log.Document.ContentEnd);
                 txt.Text = "Training...\n";
 
-                try
-                {
-                    worker.RunWorkerAsync();
-                }
-                catch (Exception)
-                {
-                    this.rtb_log.AppendText("Failed.");
-                }
+                t1.Start();
             }
             else MessageBox.Show("Browse the files and set the reps first!");
         }
 
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void Learning(RichTextBox rtb, ProgressBar pb, Button btn_start)
         {
-            this.rtb_log.AppendText(e.UserState.ToString() + "\n");
-            this.rtb_log.ScrollToEnd();
-            this.pb_training.Value = e.ProgressPercentage;
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-
             for (int j = 0; j < this.reps; j++)
             {
                 for (int i = 0; i < inputs.Count; i++)
@@ -161,22 +133,17 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                     }
                     catch (Exception)
                     {
-                        state = "failed";
-                        break;
+                        this.Dispatcher.Invoke(() => rtb.AppendText("Failed"));
                     }
-
                 }
-                if (state == "failed") break;
-                else worker.ReportProgress(j + 1, String.Format("Training... ({0}/{1})", j + 1, this.reps));
+                this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("Training...({0}/{1})\n", j + 1, this.reps)));
+                this.Dispatcher.Invoke(() => rtb_log.ScrollToEnd());
+                this.Dispatcher.Invoke(() => pb.Value = j + 1);
             }
-        }
 
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            this.btn_start.IsEnabled = true;
-            this.pb_training.Value = 0;
-            if(state == "") this.rtb_log.AppendText("Completed!\n");
-            else this.rtb_log.AppendText( state + "\n");
+            this.Dispatcher.Invoke(() => btn_start.IsEnabled = true);
+            this.Dispatcher.Invoke(() => pb.Value = 0);
+            this.Dispatcher.Invoke(() => rtb_log.AppendText("Completed!\n"));
         }
 
         private void btn_saveNetwork_Click(object sender, RoutedEventArgs e)
@@ -186,6 +153,11 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 NetworkHelper.SaveNetToFile(nn, "neuralNetwork.txt");
                 this.rtb_log.AppendText("Network saved! \n");
             }
+        }
+
+        public void AbortThread()
+        {
+            t1.Abort();
         }
     }
 }

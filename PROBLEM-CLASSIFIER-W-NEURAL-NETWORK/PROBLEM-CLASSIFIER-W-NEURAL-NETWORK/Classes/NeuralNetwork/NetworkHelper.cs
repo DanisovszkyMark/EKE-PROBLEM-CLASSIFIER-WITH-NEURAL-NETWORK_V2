@@ -95,9 +95,6 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
                 int atmNumberOfOutputs = Convert.ToInt32(atm2[1].ToString());
 
                 Layer atmLayer = new Layer(atmNumberOfInputs, atmNumberOfOutputs, acti);
-                //atmLayer.NumberOfInput = atmNumberOfInputs;
-                //atmLayer.NumberOfOutput = atmNumberOfOutputs;
-                //atmLayer.ActivationStrategy = acti;
 
                 double[] atmOutputs = new double[atmNumberOfOutputs];
                 atm = sr.ReadLine().Split(':');
@@ -135,7 +132,6 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
             if (sr != null)
             {
                 sr.Close();
-                MessageBox.Show("Success!");
             }
         }
     }

@@ -86,6 +86,9 @@
     <Compile Include="UserControls\NetwokLayerSizeControl.xaml.cs">
       <DependentUpon>NetwokLayerSizeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TestingControl.xaml.cs">
+      <DependentUpon>TestingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TrainingControl.xaml.cs">
       <DependentUpon>TrainingControl.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\NetwokLayerSizeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TestingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
