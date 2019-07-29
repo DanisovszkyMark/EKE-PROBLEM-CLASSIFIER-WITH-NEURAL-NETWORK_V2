@@ -8,6 +8,8 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
 {
     class Layer
     {
+        public static double learningRate = 0.033f;
+
         private ActivationStrategy activationStrategy;
         public ActivationStrategy ActivationStrategy
         {
@@ -70,8 +72,6 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
             get { return error; }
             set { error = value; }
         }
-
-        public static double learningRate = 0.033f;
 
         public double[] FeedForward(double[] Input)
         {
@@ -156,7 +156,7 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
             }
         }
 
-        public void InitializeLayer(int NumberOfInput, int NumberOfOutput, ActivationStrategy ActivationStrategy)
+        public Layer(int NumberOfInput, int NumberOfOutput, ActivationStrategy ActivationStrategy)
         {
             this.NumberOfInput = NumberOfInput;
             this.NumberOfOutput = NumberOfOutput;

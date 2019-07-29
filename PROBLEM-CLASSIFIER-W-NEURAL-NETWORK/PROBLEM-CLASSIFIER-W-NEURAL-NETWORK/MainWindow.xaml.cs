@@ -21,6 +21,7 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
         CreateLearningLabelsControl cllc;
         CreateLearningSetControl clsc;
         MakeNeuralNetworkControl mnnc;
+        TrainingControl tc;
 
         List<string> labels;
 
@@ -53,6 +54,12 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
         {
             if (mnnc == null) mnnc = new MakeNeuralNetworkControl();
             userControlHolder.Content = mnnc;
+        }
+
+        private void btn_training_Click(object sender, RoutedEventArgs e)
+        {
+            if (tc == null) tc = new TrainingControl();
+            userControlHolder.Content = tc;
         }
     }
 }

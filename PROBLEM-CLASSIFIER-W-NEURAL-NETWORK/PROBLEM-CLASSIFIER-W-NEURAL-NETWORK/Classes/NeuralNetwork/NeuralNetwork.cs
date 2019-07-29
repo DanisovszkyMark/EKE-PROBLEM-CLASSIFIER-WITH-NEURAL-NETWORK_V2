@@ -57,9 +57,9 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
             Layers = new Layer[Layer.Length - 1];
             for (int i = 0; i < Layers.Length; i++)
             {
-                Layers[i] = new Layer();
+                Layers[i] = new Layer(Layer[i], Layer[i+1], ActivationFunction);
 
-                Layers[i].InitializeLayer(Layer[i], Layer[i + 1], ActivationFunction);
+                //Layers[i].InitializeLayer(Layer[i], Layer[i + 1], ActivationFunction);
 
                 if (i < Layers.Length - 1) this.layerBuild += Layer[i] + "-";
                 else this.layerBuild += Layer[i];

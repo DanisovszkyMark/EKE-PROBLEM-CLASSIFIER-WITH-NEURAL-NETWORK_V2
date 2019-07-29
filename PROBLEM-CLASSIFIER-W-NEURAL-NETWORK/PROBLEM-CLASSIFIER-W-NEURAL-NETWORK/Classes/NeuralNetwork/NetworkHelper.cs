@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
 {
@@ -52,5 +53,90 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.Classes.NeuralNetwork
             sw.Close();
         }
 
+        public static void CreateNetworkByTxt(ref NeuralNetwork net, string fileName)
+        {
+            net = null;
+            StreamReader sr;
+            try
+            {
+                sr = new StreamReader(fileName);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("File not found!");
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unknow exception!");
+                return;
+            }
+
+            string[] atm = sr.ReadLine().Split(':');
+
+            string actiInString = atm[atm.Length - 1];
+            ActivationStrategy acti = new Sigmoid();
+            if (actiInString == "TanH") acti = new TanH();
+            else if (actiInString == "ReLU") acti = new ReLU();
+
+            int[] layers = new int[atm.Length - 1];
+            for (int i = 0; i < atm.Length - 1; i++)
+            {
+                layers[i] = Convert.ToInt32(atm[i]);
+            }
+
+            net = new NeuralNetwork(layers, acti);
+
+            List<Layer> atmLayers = new List<Layer>();
+            while (!sr.EndOfStream)
+            {
+                string[] atm2 = sr.ReadLine().Split(':');
+                int atmNumberOfInputs = Convert.ToInt32(atm2[0].ToString());
+                int atmNumberOfOutputs = Convert.ToInt32(atm2[1].ToString());
+
+                Layer atmLayer = new Layer(atmNumberOfInputs, atmNumberOfOutputs, acti);
+                //atmLayer.NumberOfInput = atmNumberOfInputs;
+                //atmLayer.NumberOfOutput = atmNumberOfOutputs;
+                //atmLayer.ActivationStrategy = acti;
+
+                double[] atmOutputs = new double[atmNumberOfOutputs];
+                atm = sr.ReadLine().Split(':');
+                for (int i = 0; i < atmOutputs.Length; i++)
+                {
+                    atmOutputs[i] = Convert.ToDouble(atm[i].ToString());
+                }
+                atmLayer.Output = atmOutputs;
+
+                double[] atmInputs = new double[atmNumberOfInputs];
+                atm = sr.ReadLine().Split(':');
+                for (int i = 0; i < atmInputs.Length; i++)
+                {
+                    atmInputs[i] = Convert.ToDouble(atm[i].ToString());
+                }
+                atmLayer.Input = atmInputs;
+
+                double[,] atmWeights = new double[atmNumberOfOutputs, atmNumberOfInputs];
+
+                for (int i = 0; i < atmNumberOfOutputs; i++)
+                {
+                    atm = sr.ReadLine().Split(':');
+                    for (int k = 0; k < atmNumberOfInputs; k++)
+                    {
+                        atmWeights[i, k] = Convert.ToDouble(atm[k].ToString());
+                    }
+                }
+                atmLayer.Weights = atmWeights;
+
+                atmLayers.Add(atmLayer);
+            }
+
+            net.Layers = atmLayers.ToArray();
+
+            if (sr != null)
+            {
+                sr.Close();
+                MessageBox.Show("Success!");
+            }
+        }
     }
 }
