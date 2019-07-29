@@ -57,10 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Clause.cs" />
-    <Compile Include="Classes\CnfStatsMaker.cs" />
-    <Compile Include="Classes\DIMACSReader.cs" />
-    <Compile Include="Classes\DIMACSStatisticsBuilder.cs" />
+    <Compile Include="Classes\CnfStats\Clause.cs" />
+    <Compile Include="Classes\CnfStats\CnfStatsMaker.cs" />
+    <Compile Include="Classes\CnfStats\DIMACSReader.cs" />
+    <Compile Include="Classes\CnfStats\DIMACSStatisticsBuilder.cs" />
+    <Compile Include="Classes\NeuralNetwork\ActivationStrategy.cs" />
+    <Compile Include="Classes\NeuralNetwork\Layer.cs" />
+    <Compile Include="Classes\NeuralNetwork\NetworkHelper.cs" />
+    <Compile Include="Classes\NeuralNetwork\NeuralNetwork.cs" />
+    <Compile Include="Classes\NeuralNetwork\ReLU.cs" />
+    <Compile Include="Classes\NeuralNetwork\Sigmoid.cs" />
+    <Compile Include="Classes\NeuralNetwork\TanH.cs" />
     <Compile Include="UserControls\AddLearningLabelControl.xaml.cs">
       <DependentUpon>AddLearningLabelControl.xaml</DependentUpon>
     </Compile>
@@ -75,6 +82,9 @@
     </Compile>
     <Compile Include="UserControls\MakeNeuralNetworkControl.xaml.cs">
       <DependentUpon>MakeNeuralNetworkControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NetwokLayerSizeControl.xaml.cs">
+      <DependentUpon>NetwokLayerSizeControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\MakeNeuralNetworkControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NetwokLayerSizeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

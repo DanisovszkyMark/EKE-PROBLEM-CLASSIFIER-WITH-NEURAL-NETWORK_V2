@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projektmunkák\EKE-PROBLEM-CLASSIFIER-WITH-NEURAL-NETWORK_V2\PROBLEM-CLASSIFIER-W-NEURAL-NETWORK\PROBLEM-CLASSIFIER-W-NEURAL-NETWORK\App.xaml
-5-2064079065
+71740950225
 
-132056931205
+22-653332223
 151984215308
-MainWindow.xaml;UserControls\AddLearningLabelControl.xaml;UserControls\CreateLearningLabelsControl.xaml;UserControls\CreateLearningSetControl.xaml;UserControls\LearningLabelControl.xaml;
+MainWindow.xaml;UserControls\AddLearningLabelControl.xaml;UserControls\CreateLearningLabelsControl.xaml;UserControls\CreateLearningSetControl.xaml;UserControls\LearningLabelControl.xaml;UserControls\MakeNeuralNetworkControl.xaml;UserControls\NetwokLayerSizeControl.xaml;
 
 False
 
