@@ -110,13 +110,13 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 }
 
                 statistics[maxJ]++;
-                this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("{0}. -> {1}\n", i, this.labels[maxJ])));
+                this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("{0}. -> {1}\n", i+1, this.labels[maxJ])));
                 this.Dispatcher.Invoke(() => rtb_log.ScrollToEnd());
             }
 
             for (int i = 0; i < statistics.Length; i++)
             {
-                if(statistics[i] > 0) this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("{0}({1})\n", labels[i], statistics[i])));
+                if(statistics[i] > 0) this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("{0}({1}) ", labels[i], statistics[i])));
             }
             this.Dispatcher.Invoke(() => rtb.AppendText("Completed!"));
             t1 = new Thread(() => createStatistics(this.rtb_log));

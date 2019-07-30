@@ -34,7 +34,6 @@
         <Button x:Name="btn_start" Content="Start" Grid.Row="3" Grid.ColumnSpan="3" Width="100" Height="50" Click="btn_start_Click"/>
 
         <RichTextBox x:Name="rtb_log" Grid.Row="4" Grid.ColumnSpan="3" Margin="30,10" IsReadOnly="True"/>
-        <ProgressBar x:Name="pb_testing" Grid.Row="5" Grid.ColumnSpan="3" Height="30" VerticalAlignment="Top" Margin="30,10"/>
     </Grid>
 
 </UserControl>
