@@ -110,7 +110,7 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 this.pb_training.Maximum = this.reps;
 
                 TextRange txt = new TextRange(this.rtb_log.Document.ContentStart, this.rtb_log.Document.ContentEnd);
-                txt.Text = "Training...\n";
+                txt.Text = "";
 
                 t1.Start();
             }
@@ -119,6 +119,8 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
 
         private void Learning(RichTextBox rtb, ProgressBar pb, Button btn_start)
         {
+            this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("Training...(0/{0})\n\n", this.reps)));
+
             for (int j = 0; j < this.reps; j++)
             {
                 for (int i = 0; i < inputs.Count; i++)
@@ -138,12 +140,15 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
                 }
                 this.Dispatcher.Invoke(() => rtb.AppendText(String.Format("Training...({0}/{1})\n", j + 1, this.reps)));
                 this.Dispatcher.Invoke(() => rtb_log.ScrollToEnd());
+
                 this.Dispatcher.Invoke(() => pb.Value = j + 1);
             }
 
             this.Dispatcher.Invoke(() => btn_start.IsEnabled = true);
             this.Dispatcher.Invoke(() => pb.Value = 0);
             this.Dispatcher.Invoke(() => rtb_log.AppendText("Completed!\n"));
+
+            t1 = new Thread(() => Learning(this.rtb_log, this.pb_training, this.btn_start));
         }
 
         private void btn_saveNetwork_Click(object sender, RoutedEventArgs e)

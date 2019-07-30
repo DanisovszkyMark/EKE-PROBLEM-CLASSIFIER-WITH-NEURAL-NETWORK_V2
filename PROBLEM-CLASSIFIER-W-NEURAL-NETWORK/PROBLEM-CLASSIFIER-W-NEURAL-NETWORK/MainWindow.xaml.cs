@@ -18,10 +18,11 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
 {
     public partial class MainWindow : Window
     {
-        CreateLearningLabelsControl cllc;
-        CreateLearningSetControl clsc;
-        MakeNeuralNetworkControl mnnc;
-        TrainingControl tc;
+        CreateLearningLabelsControl createLearningLabelsControl;
+        CreateLearningSetControl createLearningSetControl;
+        MakeNeuralNetworkControl makeNeuralNetworkControl;
+        TrainingControl trainingControl;
+        TestingControl testingControl;
 
         List<string> labels;
 
@@ -33,38 +34,50 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK
 
         private void btn_learningLabels_Click(object sender, RoutedEventArgs e)
         {
-            if (cllc == null) cllc = new CreateLearningLabelsControl();
-            userControlHolder.Content = cllc;
+            if (createLearningLabelsControl == null) createLearningLabelsControl = new CreateLearningLabelsControl();
+            this.userControlHolder.Content = createLearningLabelsControl;
         }
 
         private void btn_learningSet_Click(object sender, RoutedEventArgs e)
         {
-            labels = (cllc == null)? null: cllc.GetLabels();
+            labels = (createLearningLabelsControl == null)? null: createLearningLabelsControl.GetLabels();
 
             if (labels != null && labels.Count > 0)
             {
-                if (clsc == null) clsc = new CreateLearningSetControl();
-                clsc.refreshLabels(this.labels);
-                userControlHolder.Content = clsc;
+                if (createLearningSetControl == null) createLearningSetControl = new CreateLearningSetControl();
+                createLearningSetControl.refreshLabels(this.labels);
+                this.userControlHolder.Content = createLearningSetControl;
             }
             else MessageBox.Show("You need to set at least one or more label first!");
         }
 
         private void btn_makeNeuralNetwork_Click(object sender, RoutedEventArgs e)
         {
-            if (mnnc == null) mnnc = new MakeNeuralNetworkControl();
-            userControlHolder.Content = mnnc;
+            if (makeNeuralNetworkControl == null) makeNeuralNetworkControl = new MakeNeuralNetworkControl();
+            this.userControlHolder.Content = makeNeuralNetworkControl;
         }
 
         private void btn_training_Click(object sender, RoutedEventArgs e)
         {
-            if (tc == null) tc = new TrainingControl();
-            userControlHolder.Content = tc;
+            if (trainingControl == null) trainingControl = new TrainingControl();
+            this.userControlHolder.Content = trainingControl;
+        }
+
+        private void btn_testing_Click(object sender, RoutedEventArgs e)
+        {
+            labels = (createLearningLabelsControl == null) ? null : createLearningLabelsControl.GetLabels();
+
+            if (this.labels != null && this.labels.Count > 0)
+            {
+                if (testingControl == null) testingControl = new TestingControl(this.labels);
+                this.userControlHolder.Content = testingControl;
+            }
+            else MessageBox.Show("You need to set at least one or more label first!");
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (tc != null) tc.AbortThread();
+            if (trainingControl != null) trainingControl.AbortThread();
         }
     }
 }

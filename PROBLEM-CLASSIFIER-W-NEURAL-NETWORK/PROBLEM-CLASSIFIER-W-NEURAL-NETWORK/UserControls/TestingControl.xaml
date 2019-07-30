@@ -12,7 +12,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -26,20 +25,16 @@
 
         <Label Content="Testing sets:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Foreground="{DynamicResource LightForegroundBrush}"/>
         <TextBox x:Name="tb_testingSets" Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="10,5,10,5" IsReadOnly="True"/>
-        <Button x:Name="btn_testingSetsBrowse" Content="..." Width="40" Height="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Button x:Name="btn_testingSetsBrowse" Content="..." Width="40" Height="30" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_testingSetsBrowse_Click"/>
 
         <Label Content="NeuralNetwork" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Foreground="{DynamicResource LightForegroundBrush}" />
         <TextBox x:Name="tb_neuralNetwork" Grid.Row="2" Grid.Column="1" MaxHeight="30" Margin="10,5,10,5" IsReadOnly="True"/>
-        <Button x:Name="btn_neuralNetworkBrowse" Content="..." Width="40" Height="30" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Button x:Name="btn_neuralNetworkBrowse" Content="..." Width="40" Height="30" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_neuralNetworkBrowse_Click"/>
 
-        <Label Content="Expected result:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Foreground="{DynamicResource LightForegroundBrush}" />
-        <TextBox x:Name="tb_expected" Grid.Row="3" Grid.Column="1" MaxHeight="30" Margin="10,5,10,5" />
+        <Button x:Name="btn_start" Content="Start" Grid.Row="3" Grid.ColumnSpan="3" Width="100" Height="50" Click="btn_start_Click"/>
 
-        <Button x:Name="btn_start" Content="Start" Grid.Row="4" Grid.ColumnSpan="3" Width="100" Height="50" Margin="0,0,110,0"/>
-        <Button x:Name="btn_saveNetwork" Content="Save network" Grid.Row="4" Grid.ColumnSpan="3" Width="100" Height="50" Margin="110,0,0,0" IsEnabled="False" />
-
-        <RichTextBox x:Name="rtb_log" Grid.Row="5" Grid.ColumnSpan="3" Margin="30,10" IsReadOnly="True"/>
-        <ProgressBar x:Name="pb_training" Grid.Row="6" Grid.ColumnSpan="3" Height="30" VerticalAlignment="Top" Margin="30,10"/>
+        <RichTextBox x:Name="rtb_log" Grid.Row="4" Grid.ColumnSpan="3" Margin="30,10" IsReadOnly="True"/>
+        <ProgressBar x:Name="pb_testing" Grid.Row="5" Grid.ColumnSpan="3" Height="30" VerticalAlignment="Top" Margin="30,10"/>
     </Grid>
 
 </UserControl>
