@@ -32,6 +32,8 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
         {
             this.wp_labels.Items.Add(new LearningLabelControl(this.tb_label.Text));
             labels.Add(this.tb_label.Text);
+
+            this.tb_label.Text = "";
         }
 
         public List<string> GetLabels()

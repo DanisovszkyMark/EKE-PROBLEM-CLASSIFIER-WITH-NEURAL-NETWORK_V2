@@ -56,7 +56,8 @@ namespace PROBLEM_CLASSIFIER_W_NEURAL_NETWORK.UserControls
             else if (this.cb_activationFunctions.SelectedIndex == 1) acti = new TanH();
             else if (this.cb_activationFunctions.SelectedIndex == 2) acti = new ReLU();
 
-            NetworkHelper.SaveNetToFile(new NeuralNetwork(layers, acti), "neuralNetwork.txt"); 
+            NetworkHelper.SaveNetToFile(new NeuralNetwork(layers, acti), "neuralNetwork.txt");
+            MessageBox.Show("Success!");
         }
     }
 }

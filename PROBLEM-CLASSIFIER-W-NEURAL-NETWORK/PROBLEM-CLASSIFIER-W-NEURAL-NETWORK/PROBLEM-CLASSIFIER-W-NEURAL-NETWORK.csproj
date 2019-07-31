@@ -68,9 +68,6 @@
     <Compile Include="Classes\NeuralNetwork\ReLU.cs" />
     <Compile Include="Classes\NeuralNetwork\Sigmoid.cs" />
     <Compile Include="Classes\NeuralNetwork\TanH.cs" />
-    <Compile Include="UserControls\AddLearningLabelControl.xaml.cs">
-      <DependentUpon>AddLearningLabelControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\CreateLearningLabelsControl.xaml.cs">
       <DependentUpon>CreateLearningLabelsControl.xaml</DependentUpon>
     </Compile>
@@ -104,10 +101,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\AddLearningLabelControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\CreateLearningLabelsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
